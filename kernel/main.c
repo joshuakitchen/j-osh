@@ -7,4 +7,7 @@ void kernel_entry(void)
 {
   tty_clear();
   print("Welcome to J-OSH\n");
+  int i;
+  for(i = 0; i < 50; i++)
+    print("Test\n");
 }

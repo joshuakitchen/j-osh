@@ -1,5 +1,6 @@
 #include <drivers/io.h>
 #include <drivers/tty.h>
+#include <memory.h>
 
 int print_char(char, int, int, char);
 int get_offset(int, int);
@@ -47,6 +48,19 @@ int print_char(char c, int col, int row, char attr)
     vidmem[offset] = c;
     vidmem[offset+1] = attr;
     offset += 2;
+  }
+
+  if(offset >= MAX_ROWS * MAX_COLS * 2) {
+    int i;
+    for(i = 1; i < MAX_ROWS; i++)
+      memcpy(get_offset(0, i) + VIDEO_MEMORY,
+             get_offset(0, i-1) + VIDEO_MEMORY,
+             MAX_COLS * 2);
+
+    char* last_line = get_offset(0, MAX_ROWS - 1) + VIDEO_MEMORY;
+    for (i = 0; i < MAX_COLS * 2; i++) last_line[i] = 0;
+
+    offset -= 2 * MAX_COLS;
   }
   set_cursor_offset(offset);
   return offset;
