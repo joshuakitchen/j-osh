@@ -1,11 +1,14 @@
-C_SOURCESmediamedia = $(wildcard kernel/*.c)
-HEADERS = $(wildcard kernel/*.h)
+ARCH=i386
+ARCHDIR=kernel/arch/${ARCH}
+
+C_SOURCES = $(wildcard kernel/include/*.c kernel/include/drivers/*.c kernel/*.c $(ARCHDIR)/*.c $(ARCHDIR)/drivers/*.c)
+HEADERS = $(wildcard kernel/include/*.h kernel/include/drivers/*.h kernel/*.h $(ARCHDIR)/*.h $(ARCHDIR)/drivers/*.h)
 OBJS = ${C_SOURCES:.c=.o}
 
 CC = gcc
 LINKER = ld
 
-CFLAGS = -m32
+CFLAGS = -m32 -I kernel/include/
 LINKER_FLAGS = -m elf_i386
 
 .PHONY: clean

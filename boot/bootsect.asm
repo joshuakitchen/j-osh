@@ -8,7 +8,7 @@ start:
   mov sp, bp
 
   mov bx, KERNEL_OFFSET
-  mov dh, 0x02
+  mov dh, 16
   mov dl, [BOOT_DRIVE]
   call disk_load
 

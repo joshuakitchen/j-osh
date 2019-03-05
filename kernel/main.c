@@ -1,8 +1,10 @@
+#include <drivers/tty.h>
 
-
+/// <summary>
+/// The Kernel Entry point as defined in the boot loader.
+/// </summary>
 void kernel_entry(void)
 {
-    char* video_memory = (char*) 0xb8000;
-    *video_memory = 'X';
-    video_memory[1] = 0x0f;
+  tty_clear();
+  print("Welcome to J-OSH\n");
 }
