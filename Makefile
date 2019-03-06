@@ -1,14 +1,14 @@
 ARCH=i386
 ARCHDIR=kernel/arch/${ARCH}
 
-C_SOURCES = $(wildcard kernel/include/*.c kernel/include/drivers/*.c kernel/*.c $(ARCHDIR)/*.c $(ARCHDIR)/drivers/*.c)
-HEADERS = $(wildcard kernel/include/*.h kernel/include/drivers/*.h kernel/*.h $(ARCHDIR)/*.h $(ARCHDIR)/drivers/*.h)
-OBJS = ${C_SOURCES:.c=.o}
+C_SOURCES = $(wildcard kernel/include/*.c kernel/include/drivers/*.c kernel/include/cpu/*.c kernel/*.c kernel/shell/*.c $(ARCHDIR)/*.c $(ARCHDIR)/drivers/*.c $(ARCHDIR)/cpu/*.c)
+HEADERS = $(wildcard kernel/include/*.h kernel/include/drivers/*.h kernel/include/cpu/*.h kernel/*.h kernel/shell/*.h $(ARCHDIR)/*.h $(ARCHDIR)/drivers/*.h $(ARCHDIR)/cpu/*.h)
+OBJS = ${C_SOURCES:.c=.o $(ARCHDIR)/drivers/interrupt.o}
 
 CC = gcc
 LINKER = ld
 
-CFLAGS = -m32 -I kernel/include/
+CFLAGS = -g -m32 -fno-stack-protector -nostdlib -I kernel/include/
 LINKER_FLAGS = -m elf_i386
 
 .PHONY: clean
