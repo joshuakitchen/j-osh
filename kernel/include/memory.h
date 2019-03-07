@@ -4,10 +4,10 @@
 #include "types.h"
 
 typedef struct pmemory_region {
-  u32 baseH;
   u32 baseL;
-  u32 lengthH;
+  u32 baseH;
   u32 lengthL;
+  u32 lengthH;
   u32 type;
   u32 acpi;
 } pmemory_region_t;

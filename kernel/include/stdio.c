@@ -31,7 +31,7 @@ int printf(const char* format, ...)
     if(*format == 'c') {
       format++;
       char c = (char) va_arg(parameters, int);
-      tty_print(c, sizeof(c));
+      tty_print(&c, sizeof(c));
       written++;
     } else if(*format == 's') {
       format++;
