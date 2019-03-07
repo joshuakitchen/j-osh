@@ -3,8 +3,8 @@
 
 #include "vga.h"
 
-void print(char* message);
-void print_at(char* message, int, int);
+void tty_print(char* message, int);
+void print_at(char* message, int, int, int);
 void tty_clear();
 
 #endif
